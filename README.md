@@ -52,6 +52,14 @@ pytest
 - `reflection.md` - Project reflection and design decisions
 - `requirements.txt` - Python dependencies
 
+## 📐 System Architecture
+
+Below is the finalized UML class diagram for PawPal+, illustrating the relationships between the Owner, Pet, Task, and Scheduler classes.
+
+<p align="center">
+  <img src="uml_final.png" title="PawPal+ UML Diagram" alt="PawPal+ UML Diagram" width="500" />
+</p>
+
 ## 🤝 Contributing
 Feel free to open issues or submit pull requests for improvements!
 
