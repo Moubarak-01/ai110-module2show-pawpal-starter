@@ -8,8 +8,8 @@ st.set_page_config(page_title="PawPal+", page_icon="🐾", layout="centered")
 # This ensures our Owner object persists across button clicks
 if "owner" not in st.session_state:
     # Create a default owner and one default pet to start
-    initial_owner = Owner(id="o1", name="Jordan")
-    initial_pet = Pet(id="p1", name="Mochi", species="Dog")
+    initial_owner = Owner(id="o1", name="Moubarak")
+    initial_pet = Pet(id="p1", name="Boss", species="Dog") # Changed from "Mochi" to "Boss" cause my dog is called Boss and I want to see his name in the app :)
     initial_owner.pets.append(initial_pet)
     st.session_state.owner = initial_owner
 
