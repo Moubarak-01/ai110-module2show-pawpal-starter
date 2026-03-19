@@ -1,16 +1,25 @@
 # PawPal+ Project Reflection
 
-## 1. System Design
+### 1. System Design
+
+#### Core User Actions
+1. **Manage Pet Profiles:** Users can create and store profiles for multiple pets, including essential details like name and species, to establish a personalized care context.
+2. **Define and Prioritize Tasks:** Users can add specific care activities (feeding, walking, medication) and assign each a duration and priority level (High, Medium, Low) to guide the scheduling logic.
+3. **Generate Optimized Schedules:** Users can trigger a scheduling engine that organizes all pending tasks into a chronological daily plan based on priority and time constraints, including a brief explanation of the reasoning.
 
 **a. Initial design**
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+- **Description:** My initial UML design focused on a modular architecture where data (Pets/Tasks) is separated from the logic (Scheduler). I used Python Dataclasses for the data entities to keep the code clean and focused on attributes.
+- **Classes & Responsibilities:**
+    - `Owner`: Acts as the primary data store, managing a collection of `Pet` objects.
+    - `Pet`: Holds specific information about an animal and a list of `Task` objects assigned to it.
+    - `Task`: A simple data object containing the description, duration, priority level, and time for a specific activity.
+    - `Scheduler`: The "engine" of the app; it communicates with the `Owner` to gather all tasks and applies sorting and conflict-detection logic to create the daily plan.
 
 **b. Design changes**
 
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+- **Did your design change?** Yes.
+- **Change & Reason:** Initially, I planned for the `Pet` class to handle its own scheduling. However, during implementation, I realized that a centralized `Scheduler` class was more efficient. This change allowed the system to detect conflicts between tasks for *different* pets (e.g., two dogs needing a walk at the same time) which wouldn't have been possible if the logic was hidden inside individual Pet objects.
 
 ---
 
