@@ -27,13 +27,11 @@
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+My scheduler considers two main constraints: Priority (High, Medium, Low) and scheduled Time. I decided that Priority was the most important constraint because it ensures critical care activities—like administering medication—happen regardless of their timing. This prioritization reflects real-world pet care needs where urgent tasks must take precedence over routine ones.
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+I implemented a 'lightweight' conflict detection system that checks for overlapping task times but doesn't account for 'travel time' or 'prep time' between activities. This tradeoff is reasonable for a Minimum Viable Product (MVP) because it keeps the user interface clean and simple, avoiding complexity that could overwhelm new users while still providing essential conflict warnings.
 
 ---
 
@@ -41,13 +39,11 @@
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+I used AI tools extensively throughout this project for design brainstorming, code generation, and debugging. Specifically, I leveraged AI for brainstorming the initial UML class diagram, generating Mermaid.js syntax for visual diagrams, and scaffolding Python Dataclasses with proper type hints. The most helpful prompts were those asking for complete code implementations with specific requirements, such as "implement this method with these parameters."
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+I rejected an AI suggestion to put scheduling logic inside the Pet class, instead choosing a centralized Scheduler class. I evaluated this by considering the real-world use case: with multiple pets, conflicts could occur between tasks for different animals (like two dogs needing walks simultaneously). A centralized approach better handles these cross-pet scenarios, which individual Pet objects couldn't detect. I verified this by sketching out the data flow and confirming the Scheduler's access to all tasks.
 
 ---
 
@@ -55,13 +51,11 @@
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+I created a comprehensive pytest suite that verified three critical behaviors: 1. Task addition to pets, ensuring new tasks were properly stored; 2. Priority sorting, confirming High-priority tasks appeared before Medium in the generated schedule; and 3. Conflict detection, validating that overlapping tasks triggered appropriate warnings. These tests were important because they ensured the core scheduling logic worked correctly before integrating with the Streamlit UI.
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+I have 5-star confidence that my scheduler works correctly for the implemented features. If I had more time, I would test edge cases like 'overnight tasks' (activities crossing midnight) or 'zero-minute duration' tasks to ensure robustness in unusual scenarios.
 
 ---
 
@@ -69,12 +63,12 @@
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+I was most satisfied with seeing the backend logic successfully 'drive' the Streamlit UI. Watching tasks appear in the schedule with proper priority colors and conflict warnings made the abstract code feel tangible and functional.
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+If I had another iteration, I would add a 'Calendar View' for visualizing the full day's schedule and implement 'Push Notifications' for task reminders to make the app more proactive rather than reactive.
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+I learned that the 'Lead Architect' role is about verifying AI logic—AI is great at generating code, but the human must ensure the relationships between classes (like Owner and Pet) make sense for the real-world use case. A specific challenge was managing Streamlit Session State (st.session_state) to ensure the Owner object and added tasks didn't disappear when the app refreshed after a button click.

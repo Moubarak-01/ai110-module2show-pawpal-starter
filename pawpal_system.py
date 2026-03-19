@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List, Optional, Literal
-from datetime import datetime
+from datetime import datetime, timedelta
 
 @dataclass
 class Task:
@@ -49,8 +49,23 @@ class Scheduler:
         return sorted_tasks
 
     def detect_conflicts(self, tasks: List[Task]) -> List[str]:
-        """Identifies tasks that overlap in time and returns a list of conflict descriptions."""
-        pass
+        """Identifies tasks that overlap in time and returns a list of warnings."""
+        conflicts = []
+        # Sort by time to check neighbors
+        sorted_by_time = sorted([t for t in tasks if t.scheduled_time], key=lambda x: x.scheduled_time)
+        
+        for i in range(len(sorted_by_time) - 1):
+            current_task = sorted_by_time[i]
+            next_task = sorted_by_time[i+1]
+            
+            # Calculate when the current task ends
+            end_time = current_task.scheduled_time + timedelta(minutes=current_task.duration)
+            
+            # If the next task starts before the current one ends, it's a conflict
+            if next_task.scheduled_time < end_time:
+                conflicts.append(f"⚠️ Conflict: '{current_task.description}' overlaps with '{next_task.description}'")
+        
+        return conflicts
 
     def get_all_tasks(self) -> List[Task]:
         """Collects and returns all tasks from all pets."""
